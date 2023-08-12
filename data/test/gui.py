@@ -5,10 +5,10 @@ import spacy
 import fitz  # PyMuPDF
 
 def process_resume():
-    # Get the PDF resume path from the input field
+    # Getting the PDF resume path from the input field
     pdf_path = pdf_path_entry.get()
     
-    # Load the PDF and extract text
+    # Loading the PDF and extracting text
     pdf_document = fitz.open(pdf_path)
     resume_text = ""
     for page_num in range(pdf_document.page_count):
@@ -16,19 +16,19 @@ def process_resume():
         resume_text += page.get_text("text")
     pdf_document.close()
     
-    # Get the spaCy model path from the input field
+    # Getting the spaCy model path from the input field
     spacy_model_path = spacy_model_path_entry.get()
     
-    # Load the custom spaCy model
+    # Loading the custom spaCy model
     nlp = spacy.load(spacy_model_path)
     
-    # Process the resume using spaCy
+    # Processing the resume using spaCy
     doc = nlp(resume_text)
     
-    # Extract entities
+    # Extracting entities
     entities = [(ent.text, ent.label_) for ent in doc.ents]
     
-    # Display the extracted entities
+    # Displaying the extracted entities
     result_text.config(state=tk.NORMAL)
     result_text.delete("1.0", tk.END)
     for entity, label in entities:
@@ -38,9 +38,9 @@ def process_resume():
 # Create the main window
 root = tk.Tk()
 root.title("Resume Entity Extraction")
-root.geometry("600x600")  # Set window size
+root.geometry("600x600") 
 
-# Create and position GUI elements
+# Creating and positioning GUI elements
 pdf_path_label = tk.Label(root, text="Enter PDF Resume Path:")
 pdf_path_label.pack(pady=(10, 0))
 
